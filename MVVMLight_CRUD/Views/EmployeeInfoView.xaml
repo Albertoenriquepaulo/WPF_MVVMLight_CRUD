@@ -35,8 +35,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                   Grid.Column="1" Text="Employees List" 
-                   FontWeight="Bold" FontSize="30"/>
+                   Grid.Column="1" Text="Employees List"/>
         <DataGrid Grid.Row="3" Grid.Column="1" 
                   FontSize="16"
                   ColumnWidth="*"
@@ -46,7 +45,6 @@
                   />
         <Button Grid.Row="5" Grid.Column="1" 
                 Content="Get List" 
-                FontWeight="Bold" FontSize="30"
                 x:Name="btnloadallemployees"
                 Command="{Binding ReadAllCommand}"/>
 

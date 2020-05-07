@@ -36,7 +36,7 @@
         <TextBlock Grid.Row="1" Text="Employee Data" 
                    Grid.ColumnSpan="4" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                   FontSize="25"/>
+                   />
         <!--Emp No-->
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Number"/>
         <TextBox Grid.Row="3" Grid.Column="2" 
@@ -61,8 +61,6 @@
         <Button Grid.Row="13" Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Content="Save"
-                FontSize="30"
-                FontWeight="Bold"
                 Command="{Binding SaveCommand}" CommandParameter="{Binding Employee}"/>
 
     </Grid>

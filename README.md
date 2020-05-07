@@ -32,7 +32,7 @@ Click derecho a la solution "Clean" or "Clean solution" y después "Rebuild"
 
 1. Creamos una Base de Datos sencilla, con solo una tabla Employee
 
-![image-20200507145535142](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507145535142.png)
+![](D:\Projects\.NetCore\WPF\MVVMLight_CRUD\image-20200507145535142.png)
 
 ## Paso 2
 
@@ -337,3 +337,25 @@ Asi debe ir quedando nuestra clase ***MainViewModel***
 ```
 
 *RelayCommand* es pasado junto con el método *SaveEmployee()*. Esto es posible porque el método SaveEmployee acepta el objeto *Employee* como su parámetro de entrada. Este es el mismo objeto definido en la declaración de la propiedad genérica *RelayCommand*
+
+## Paso 2
+
+Añadiremos especie de estilos globales, para esto Abrimos *App.Xaml* y en resources, añadimos estilos a *TextBlock* y *TextBoxes*
+
+```xaml
+<Application x:Class="MVVMLight_CRUD.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:MVVMLight_CRUD" StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Application.Resources>
+        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:MVVMLight_CRUD.ViewModel" />
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+    </Application.Resources>
+</Application>
+```
+
