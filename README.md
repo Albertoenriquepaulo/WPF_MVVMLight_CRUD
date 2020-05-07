@@ -196,3 +196,144 @@ Creamos una carpeta llamada Views y añadimos un item del tipo *User Control (WP
 El *Locator* es declarado en los recursos del *App.xaml*. Main es la propiedad pública expuesta por el *ViewModelLocator* y esta ViewModelLocator retorna un objeto del tipo MainViewModel. 
 
 ***La expresión anterior significa que MainViewModel ahora está vinculado con UserControl. Esto significa que todas las declaraciones públicas (propiedades y comandos de notificación obligatoria) pueden vincularse con los elementos XAML en la vista EmployeeInfoView.xaml.***
+
+3. Enlazamos (Bind) el command *ReadAllCommand* y la colección *Employees* del *MainViewModel* a el *Button* y el *DataGrid* respectivamente, esto porsupuesto lo hacemos en *EmployeeInfoView.xaml*
+
+   ```xaml
+   <DataGrid Grid.Row="3" Grid.Column="1" 
+                     FontSize="16"
+                     ColumnWidth="*"
+                     IsReadOnly="True"
+                     x:Name="dgemp"
+                     ItemsSource="{Binding Employees}"
+                     />
+           <Button Grid.Row="5" Grid.Column="1" 
+                   Content="Get List" 
+                   FontWeight="Bold" FontSize="30"
+                   x:Name="btnloadallemployees"
+                   Command="{Binding ReadAllCommand}"/>
+   ```
+
+## Paso 8
+
+Ejecutamos el proyecto y el DataGrid debe mostrar la data presente en employees cuando hagamos Click sobre el boton *"Get List"*
+
+![image-20200507183551441](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507183551441.png)
+
+
+
+# Pasando Parámetros desde el View a el ViewModel
+
+En los pasos anteriores, vimos como crear el ViewModel, definimos Notificaciones de cambio de las propiedades y tambien el RelayCommand.
+
+En esta sección veremos como enviar Data desde el View al ViewModel y escribir en nuestra Base de Datos.
+
+## Paso 1
+
+1. Declarar las siguientes propiedas en el *MainViewModel*
+
+```c#
+private Employee _employee;
+public Employee Employee
+{
+    get { return _employee; }
+    set { _employee = value; RaisePropertyChanged("Employee"); }
+}
+```
+
+Este objeto Employee será usado para agregar los nuevos registros Employee
+
+2. Ahora creamos el metodo que accederá a la BD *SaveEmployee* y guardará el empleado, todo esto en nuestra clase *MainViewModel*
+
+```C#
+private Employee _employee;
+public Employee Employee
+{
+    get { return _employee; }
+    set { _employee = value; RaisePropertyChanged("Employee"); }
+}
+void SaveEmployee(Employee emp)
+{
+    Employee.EmpNo = _serviceProxy.CreateEmployee(emp);
+    if (Employee.EmpNo != 0)
+    {
+        Employees.Add(Employee);
+        GetEmployees();
+        RaisePropertyChanged("Employee"); //Creo que esto está demás
+    }
+}
+```
+
+El metodo *CreateEmployee(emp)* retorna el numero de empleado, por lo que si este numero es diferente de cero, agragamos el objeto Employee a nuestro *Employees observable collection*.
+
+Nos queda asociar el boton de Save o Guardar empleado a un Commando, para esto instanciamos un nuevo objeto RelayCommand in la clase ViewModel (*MainViewModel*)
+
+```C#
+public RelayCommand<employeeinfo> SaveCommand { get; set; }	
+```
+
+Declaramos La propiedad de tipo genérico *RelayCommand*, tomando en cuenta que ***T*** representa el parámetro de entrada; en nuestro caso, ***T*** es del tipo *Employee*.
+
+Asi debe ir quedando nuestra clase ***MainViewModel***
+
+```C#
+ public class MainViewModel : ViewModelBase
+    {
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        IDataAccessService _serviceProxy;
+        public RelayCommand ReadAllCommand { get; set; }
+        public RelayCommand<Employee> SaveCommand { get; set; }
+        public MainViewModel(IDataAccessService serviceProxy)
+        {
+            _serviceProxy = serviceProxy;
+
+            Employees = new ObservableCollection<Employee>();
+            ReadAllCommand = new RelayCommand(GetEmployees);
+
+            Employee = new Employee();
+            SaveCommand = new RelayCommand<Employee>(SaveEmployee);
+
+            GetEmployees();
+        }
+
+        private ObservableCollection<Employee> _employees;
+        public ObservableCollection<Employee> Employees
+        {
+            get { return _employees; }
+            set
+            {
+                _employees = value;
+                RaisePropertyChanged("Employees");
+            }
+        }
+        void GetEmployees()
+        {
+            Employees.Clear();
+            foreach (var item in _serviceProxy.GetEmployees())
+            {
+                Employees.Add(item);
+            }
+        }
+
+        private Employee _employee;
+        public Employee Employee
+        {
+            get { return _employee; }
+            set { _employee = value; RaisePropertyChanged("Employee"); }
+        }
+        void SaveEmployee(Employee emp)
+        {
+            Employee.EmpNo = _serviceProxy.CreateEmployee(emp);
+            if (Employee.EmpNo != 0)
+            {
+                Employees.Add(Employee);
+                GetEmployees();
+                RaisePropertyChanged("Employee"); //Creo que esto está demás
+            }
+        }
+    }
+```
+
+*RelayCommand* es pasado junto con el método *SaveEmployee()*. Esto es posible porque el método SaveEmployee acepta el objeto *Employee* como su parámetro de entrada. Este es el mismo objeto definido en la declaración de la propiedad genérica *RelayCommand*

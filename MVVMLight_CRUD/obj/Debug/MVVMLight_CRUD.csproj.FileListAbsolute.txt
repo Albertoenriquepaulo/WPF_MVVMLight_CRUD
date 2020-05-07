@@ -34,3 +34,5 @@ D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\bin\Debug\EntityFramework
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\EmployeeInfoView.g.cs
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD_Content.g.cs
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\EmployeeInfoView.baml
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\SaveEmployeeView.g.cs
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\SaveEmployeeView.baml

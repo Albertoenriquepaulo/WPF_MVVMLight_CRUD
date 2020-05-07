@@ -25,33 +25,31 @@ namespace MVVMLight_CRUD.ViewModel
         /// </summary>
         IDataAccessService _serviceProxy;
         public RelayCommand ReadAllCommand { get; set; }
+        public RelayCommand<Employee> SaveCommand { get; set; }
         public MainViewModel(IDataAccessService serviceProxy)
         {
             _serviceProxy = serviceProxy;
+
             Employees = new ObservableCollection<Employee>();
             ReadAllCommand = new RelayCommand(GetEmployees);
 
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            Employee = new Employee();
+            SaveCommand = new RelayCommand<Employee>(SaveEmployee);
+
+            GetEmployees();
+
         }
 
-        private ObservableCollection<Employee> _Employees;
+        private ObservableCollection<Employee> _employees;
         public ObservableCollection<Employee> Employees
         {
-            get { return _Employees; }
+            get { return _employees; }
             set
             {
-                _Employees = value;
+                _employees = value;
                 RaisePropertyChanged("Employees");
             }
         }
-
         void GetEmployees()
         {
             Employees.Clear();
@@ -60,6 +58,26 @@ namespace MVVMLight_CRUD.ViewModel
                 Employees.Add(item);
             }
         }
+
+        private Employee _employee;
+        public Employee Employee
+        {
+            get { return _employee; }
+            set { _employee = value; RaisePropertyChanged("Employee"); }
+        }
+        void SaveEmployee(Employee emp)
+        {
+            Employee.EmpNo = _serviceProxy.CreateEmployee(emp);
+            if (Employee.EmpNo != 0)
+            {
+                Employees.Add(Employee);
+                GetEmployees();
+                //RaisePropertyChanged("Employee"); //Creo que esto está demás
+            }
+        }
+
+
+
 
     }
 }

@@ -104,6 +104,9 @@
     <Compile Include="Views\EmployeeInfoView.xaml.cs">
       <DependentUpon>EmployeeInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SaveEmployeeView.xaml.cs">
+      <DependentUpon>SaveEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\EmployeeInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaveEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

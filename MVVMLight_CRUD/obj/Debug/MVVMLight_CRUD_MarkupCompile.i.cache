@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\App.xaml
-21037181207
+3-1824994755
 2274225360
-151949327293
+16-912584801
 1271620246266
-MainWindow.xaml;Views\EmployeeInfoView.xaml;
+MainWindow.xaml;Views\EmployeeInfoView.xaml;Views\SaveEmployeeView.xaml;
 
 True
 
