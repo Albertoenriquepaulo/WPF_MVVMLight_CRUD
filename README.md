@@ -32,13 +32,13 @@ Click derecho a la solution "Clean" or "Clean solution" y después "Rebuild"
 
 1. Creamos una Base de Datos sencilla, con solo una tabla Employee
 
-![](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/blob/master/image-20200507145535142.png=raw=true)
+![](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507145535142.png=raw=true)
 
 ## Paso 2
 
 Añadir una nueva carpeta `Models`. En esta carpeta añadir un nuevo item `ADO.NET Entity Data Model`, con el nombre que quieras, en mi caso **CompanyAEPC** e incluirle la tabla creada en el **Paso 1**. Cuando esto esté listo veremos la siguiente tabla en nuestro VS,
 
-![image-20200507154505797](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/master/image-20200507154505797.png?raw=true)
+![image-20200507154505797](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507154505797.png?raw=true)
 
 
 ## Paso 3
@@ -86,7 +86,7 @@ public interface IDataAccessService
 
 *El nombre `MVVMLightDbEntities` es el nombre de la clase generada automáticamente cuando creamos en el paso 2 `ADO.NET Entity Data Model`. Esta es la clase de nuestro contexto*
 
-![image-20200507160832324](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507160832324.png)
+![image-20200507160832324](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507160832324.png?raw=true)
 
 **Este código define nuestra interface para acceder a la data de nuestra base de datos usando Entity Framework.**
 
@@ -180,13 +180,13 @@ public MainViewModel(IDataAccessService serviceProxy)
 
 Creamos una carpeta llamada Views y añadimos un item del tipo *User Control (WPF),* a esta `View` le coloqué el nombre de *EmployeeInfoView.xaml*
 
-![image-20200507174456635](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507174456635.png)
+![image-20200507174456635](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507174456635.png?raw=true)
 
 ## Paso 7
 
 1. En esta vista añadimos un TextBlock, DataGrid y Button:
 
-![image-20200507174618371](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507174618371.png)
+![image-20200507174618371](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507174618371.png?raw=true)
 
 2. En el XAML -> *EmployeeInfoView.xaml*, seteamos/igualamos/configuramos la propiedad *DataContext* del *UserControl* a la propiedad Main expuesta por la clase ViewModelLocator:
 
@@ -219,7 +219,7 @@ El *Locator* es declarado en los recursos del *App.xaml*. Main es la propiedad p
 
 Ejecutamos el proyecto y el DataGrid debe mostrar la data presente en employees cuando hagamos Click sobre el boton *"Get List"*
 
-![image-20200507183551441](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507183551441.png)
+![image-20200507183551441](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/blob/master/MVVMLight_CRUD/assets/image-20200507183551441.png?raw=true)
 
 
 
