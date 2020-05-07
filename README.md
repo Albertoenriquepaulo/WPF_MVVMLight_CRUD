@@ -174,3 +174,25 @@ public MainViewModel(IDataAccessService serviceProxy)
 ```
 
 *ReadAllCommand es básicamente un delegado, pero su configuración y modo de funcionamiento lo hace el MVVM Light por nosotros*
+
+## Paso 6
+
+Creamos una carpeta llamada Views y añadimos un item del tipo *User Control (WPF),* a esta `View` le coloqué el nombre de *EmployeeInfoView.xaml*
+
+![image-20200507174456635](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507174456635.png)
+
+## Paso 7
+
+1. En esta vista añadimos un TextBlock, DataGrid y Button:
+
+![image-20200507174618371](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507174618371.png)
+
+2. En el XAML -> *EmployeeInfoView.xaml*, seteamos/igualamos/configuramos la propiedad *DataContext* del *UserControl* a la propiedad Main expuesta por la clase ViewModelLocator:
+
+   ```C#
+   DataContext="{Binding Main, Source={StaticResource Locator}}"
+   ```
+
+El *Locator* es declarado en los recursos del *App.xaml*. Main es la propiedad pública expuesta por el *ViewModelLocator* y esta ViewModelLocator retorna un objeto del tipo MainViewModel. 
+
+***La expresión anterior significa que MainViewModel ahora está vinculado con UserControl. Esto significa que todas las declaraciones públicas (propiedades y comandos de notificación obligatoria) pueden vincularse con los elementos XAML en la vista EmployeeInfoView.xaml.***

@@ -27,3 +27,10 @@ D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD.
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD.csproj.CopyComplete
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD.exe
 D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD.pdb
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\bin\Debug\EntityFramework.dll
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\bin\Debug\EntityFramework.xml
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\EmployeeInfoView.g.cs
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\MVVMLight_CRUD_Content.g.cs
+D:\Projects\.NetCore\WPF\MVVMLight_CRUD\MVVMLight_CRUD\obj\Debug\Views\EmployeeInfoView.baml
