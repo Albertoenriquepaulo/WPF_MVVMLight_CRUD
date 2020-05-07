@@ -223,7 +223,7 @@ Ejecutamos el proyecto y el DataGrid debe mostrar la data presente en employees 
 
 
 
-# Pasando Parámetros desde el View a el ViewModel
+# Pasando Parámetros desde el View a el ViewModel (Section 2)
 
 En los pasos anteriores, vimos como crear el ViewModel, definimos Notificaciones de cambio de las propiedades y tambien el RelayCommand.
 
@@ -361,3 +361,120 @@ Añadiremos especie de estilos globales, para esto Abrimos *App.Xaml* y en resou
 ```
 
 Debido a que estos estilos están definidos en este ***XAML***, se aplicará estos estilos a todos los *TextBlocks* y *TextBoxes* en la aplicación, sin necesidad de usar Keys.
+
+Vimos como hacer uso del Command generico para pasar parametros desde ***UI*** al *ViewModel*
+
+
+
+# Definición de comandos en elementos de la interfaz de usuario que no tienen la propiedad Command (Section 3)
+
+Existen elementos que basicamente su comportamiento o uso natural se presta mejor para el uso del *Command*, como lo son los Buttons, RadioButtons, OptionButtons, CheckBox, etc. Pero que sucederia si quisieramos enlazar un *command* a un TextBox, de manera que este se ejecute cada vez que escribimos en el. Esto lo ilustra bastante bien el tipico buscador que va sugiriendo o haciendo búsqueda a medida que vamos escribiendo. Entonces en este caso tendríamos que cambiar el comportamiento del TextBox para que soporte *command*.
+
+La libreria **MVVM Light** nos ofrece una dll para ello. Cuando la instalamos está añade la DLL ***System.Windows.Interactivity.dll***  assembly, que nos permite definir comportamientos en los elementos de la UI.
+
+**La libreria *MVVM Light*  nos ofrece una clase *EventToCommand*  bajo el *GalaSoft.MvvmLight.Command namespace*. Esta clase nos permite enlazar (bind) cualquier evento de cualquier *FrameworkElement* a un *ICommand*. En nuestro caso, utilizaremos *EventToCommand* para ejecutar un método en la clase MainViewModel definiendo el comando en el evento *TextChanged* del *TextBox*.**
+
+## Paso 1
+
+1. Debemos crear la propiedad a la cual le asignaremos el avlor del TextBox y que cambiara su valor a média que este TextBox cambie. Añadimos lo siguiente al *MainViewModel* 
+
+```C#
+private string _employeeName;
+public string EmployeeName
+{
+    get { return _employeeName; }
+    set { _employeeName = value; RaisePropertyChanged(nameof(EmployeeName)); }
+}
+```
+
+Esta propiedad tipo string se unirá al TextBox del view. Esta propiedad será seteada cada vez que hagamos cambio o insertemos texto en el TextBox element del View.
+
+2. Creamos un método para la búsqueda, filtrará los employees del Collection Employees basado en EmployeeName.
+
+```C#
+private string _employeeName;
+public string EmployeeName
+{
+    get { return _employeeName; }
+    set { _employeeName = value; RaisePropertyChanged(nameof(EmployeeName)); }
+}
+
+void SearchEmployee()
+{
+    Employees.Clear();
+    var Res = from e in _serviceProxy.GetEmployees()
+    			where e.EmpName.StartsWith(EmployeeName)
+    			select e;
+    foreach (var item in Res)
+    {
+    	Employees.Add(item);
+    }
+}
+```
+
+3. Ahora definiremos el *Objeto Command* en el mismo *MainViewModel* (*RelayCommand object*)
+
+```c#
+public RelayCommand SearchCommand { get; set; }
+```
+
+4. Y en el constructor del *MainViewModel* inicializamos el *Command Object* pasándole el metodo *SearchEmployee*, no hace falta pero también inicializo la variable *EmployeeName*
+
+```C#
+EmployeeName = string.Empty;
+SearchCommand = new RelayCommand(SearchEmployee);
+```
+
+## Paso 2
+
+Como último paso debemos hacer los ***Binds*** en las vista, es decir registrar la interactividad y configurar el *EventToObject* en el XAML. 
+
+Debemos añadir el ***TextBlock*** y el ***TextBox*** correspondiente en la vista ***EmployeeInfoView.xaml***
+
+```XAML
+<TextBlock Grid.Row="3" VerticalAlignment="Center"
+                   Grid.Column="1" Text="Search" FontSize="16"/>
+        <TextBox Grid.Row="3" Grid.Column="1" 
+                 VerticalAlignment="Center" 
+                 Width="200" Height="30"
+                 Margin="30,0,0,0"
+                 Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}"
+                 >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <mvvm:EventToCommand 
+                    Command="{Binding SearchCommand, Mode=OneWay}"
+                     />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+```
+
+Para que el código de arriba funcione debemos añadir las lineas de código siguiente (directivas) dentro de la etiqueta ***UserControl***
+
+```xaml
+xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+```
+
+Quedando esta etiqueta de la siguiente manera
+
+```XAML
+<UserControl x:Class="MVVMLight_CRUD.Views.EmployeeInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMLight_CRUD.Views" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding Main, Source={StaticResource Locator}}">
+    .
+    .
+    .
+</UserControl>
+```
+
+**Usando el *EventToCommand*, podemos fácilmente enlazar un *Command* a un *FrameworkElement*.**
