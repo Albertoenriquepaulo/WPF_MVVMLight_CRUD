@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVVMLight_CRUD.Model
+namespace MVVMLight_CRUD.Models
 {
     using System;
     using System.Collections.Generic;

@@ -79,24 +79,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\CompanyAEPC.Context.cs">
+    <Compile Include="Models\CompanyAEPC.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyAEPC.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CompanyAEPC.cs">
+    <Compile Include="Models\CompanyAEPC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyAEPC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CompanyAEPC.Designer.cs">
+    <Compile Include="Models\CompanyAEPC.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyAEPC.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Employee.cs">
+    <Compile Include="Models\Employee.cs">
       <DependentUpon>CompanyAEPC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\DataAccessService.cs" />
+    <Compile Include="Services\IDataAccessService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -130,11 +132,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\CompanyAEPC.edmx">
+    <EntityDeploy Include="Models\CompanyAEPC.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CompanyAEPC.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\CompanyAEPC.edmx.diagram">
+    <None Include="Models\CompanyAEPC.edmx.diagram">
       <DependentUpon>CompanyAEPC.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -147,12 +149,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\CompanyAEPC.Context.tt">
+    <Content Include="Models\CompanyAEPC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CompanyAEPC.Context.cs</LastGenOutput>
       <DependentUpon>CompanyAEPC.edmx</DependentUpon>
     </Content>
-    <Content Include="Model\CompanyAEPC.tt">
+    <Content Include="Models\CompanyAEPC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CompanyAEPC.edmx</DependentUpon>
       <LastGenOutput>CompanyAEPC.cs</LastGenOutput>

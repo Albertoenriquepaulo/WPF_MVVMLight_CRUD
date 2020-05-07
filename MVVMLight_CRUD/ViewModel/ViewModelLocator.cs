@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
+using MVVMLight_CRUD.Services;
 
 namespace MVVMLight_CRUD.ViewModel
 {
@@ -30,6 +31,7 @@ namespace MVVMLight_CRUD.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
 
             ////if (ViewModelBase.IsInDesignModeStatic)
             ////{
