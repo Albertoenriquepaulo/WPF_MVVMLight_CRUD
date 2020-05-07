@@ -32,13 +32,14 @@ Click derecho a la solution "Clean" or "Clean solution" y después "Rebuild"
 
 1. Creamos una Base de Datos sencilla, con solo una tabla Employee
 
-![](D:\Projects\.NetCore\WPF\MVVMLight_CRUD\image-20200507145535142.png)
+![](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/master/image-20200507145535142.png=raw=true)
 
 ## Paso 2
 
 Añadir una nueva carpeta `Models`. En esta carpeta añadir un nuevo item `ADO.NET Entity Data Model`, con el nombre que quieras, en mi caso **CompanyAEPC** e incluirle la tabla creada en el **Paso 1**. Cuando esto esté listo veremos la siguiente tabla en nuestro VS,
 
-![image-20200507154505797](C:\Users\Alberto\AppData\Roaming\Typora\typora-user-images\image-20200507154505797.png)
+![image-20200507154505797](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/master/image-20200507154505797.png?raw=true)
+
 
 ## Paso 3
 
@@ -359,3 +360,4 @@ Añadiremos especie de estilos globales, para esto Abrimos *App.Xaml* y en resou
 </Application>
 ```
 
+Debido a que estos estilos están definidos en este ***XAML***, se aplicará estos estilos a todos los *TextBlocks* y *TextBoxes* en la aplicación, sin necesidad de usar Keys.
