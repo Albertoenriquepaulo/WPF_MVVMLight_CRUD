@@ -32,7 +32,7 @@ Click derecho a la solution "Clean" or "Clean solution" y después "Rebuild"
 
 1. Creamos una Base de Datos sencilla, con solo una tabla Employee
 
-![](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/master/image-20200507145535142.png=raw=true)
+![](https://github.com/Albertoenriquepaulo/WPF_MVVMLight_CRUD/assets/blob/master/image-20200507145535142.png=raw=true)
 
 ## Paso 2
 
